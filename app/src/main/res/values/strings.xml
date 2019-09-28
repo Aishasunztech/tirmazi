@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Al Tirmazi</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="book_name">Book: Al Tirmazi  </string>
+    <string name="bookNameToolbar">Al Tirmazi #</string>
+    <string name="sahih_bukhari">Al Tirmazi</string>
+    <string name="app_title">Al-Tirmazi</string>
+
+
+<!--    Testing Ids-->
+    <string name="app_id">ca-app-pub-9166385430984549~6554992846</string>
+    <string name="banner_id">ca-app-pub-9166385430984549/2424176148</string>
+    <string name="interstitial_id">ca-app-pub-9166385430984549/2288444770</string>
+</resources>
