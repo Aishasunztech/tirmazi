@@ -19,11 +19,11 @@
 
 
 
-        <activity android:name=".BookMarkActivity"></activity>
-        <activity android:name=".HadithDetailsActivity" />
-        <activity android:name=".ChapterDetailsActivity" />
-        <activity android:name=".BookDetailsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".BookMarkActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".HadithDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ChapterDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".BookDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

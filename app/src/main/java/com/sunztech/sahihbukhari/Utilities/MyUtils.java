@@ -1,8 +1,11 @@
 package com.sunztech.sahihbukhari.Utilities;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +13,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+import com.sunztech.sahihbukhari.AlarmReceiver;
+
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.tabs.TabLayout;
+import static com.sunztech.sahihbukhari.Utilities.AppConstants.IS_ALARM_SET;
+import static com.sunztech.sahihbukhari.Utilities.AppConstants.NOTIFICATION_PREFS;
+
 
 public class MyUtils {
 
@@ -53,10 +61,10 @@ public class MyUtils {
     }
 
     public static void shareContent(String content, Context context) {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, content);
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, content);
         context.startActivity(Intent.createChooser(sharingIntent, "Share Text"));
     }
 
@@ -106,11 +114,34 @@ public class MyUtils {
     }
 
     public static void shareApp(String content, Context context) {
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, content);
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, content);
         context.startActivity(Intent.createChooser(sharingIntent, "Share Text"));
+    }
+
+    public static boolean getBooleanPref(Context context,String key)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(NOTIFICATION_PREFS,Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key,false);
+    }
+
+    public static void setBooleanPref(Context context,String key,boolean value)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(NOTIFICATION_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(IS_ALARM_SET,value).commit();
+
+    }
+
+    public static void setAlarmManager(Context context, long timeInMillis) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intentAlarm = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intentAlarm, 0);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        setBooleanPref(context,IS_ALARM_SET,true);
     }
 
 }
