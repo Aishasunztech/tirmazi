@@ -1,6 +1,18 @@
 apply plugin: 'com.android.application'
- apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.7'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+repositories {
+    maven { url 'https://maven.google.com' }
+}
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -20,6 +32,13 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        manifestPlaceholders = [
+                onesignal_app_id: 'c962cef6-d027-4c4d-b6ac-35dbda040b46',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
 }
 
@@ -58,4 +77,7 @@ dependencies {
     // Add the Firebase Crashlytics dependency.
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
+    // Onesignal.
+    implementation 'com.onesignal:OneSignal:3.14.0'
 }
+apply plugin: 'com.google.gms.google-services'
