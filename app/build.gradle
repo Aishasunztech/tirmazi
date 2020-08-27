@@ -14,13 +14,13 @@ repositories {
     maven { url 'https://maven.google.com' }
 }
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.jamiatirmizi.tirmidhisharifurdu"
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 6
-        versionName "1.6"
+        targetSdkVersion 29
+        versionCode 7
+        versionName "1.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
