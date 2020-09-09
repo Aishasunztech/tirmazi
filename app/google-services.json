@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "110301520908",
+    "firebase_url": "https://tirmazi-d42de.firebaseio.com",
+    "project_id": "tirmazi-d42de",
+    "storage_bucket": "tirmazi-d42de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110301520908:android:cfe92c9b1fc91e58017a29",
+        "android_client_info": {
+          "package_name": "com.jamiatirmizi.tirmidhisharifurdu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110301520908-l6r79a1h3lhun0nq2j78p7l80m0ectus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jamiatirmizi.tirmidhisharifurdu",
+            "certificate_hash": "86537421004fc0d8213cb1b4a769e0c86ece70e7"
+          }
+        },
+        {
+          "client_id": "110301520908-f1fomu729c80l6nvp4gvam9j78kfru0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj7P_qYevq76DkZzehnt7reCUzEOUiyck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110301520908-f1fomu729c80l6nvp4gvam9j78kfru0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

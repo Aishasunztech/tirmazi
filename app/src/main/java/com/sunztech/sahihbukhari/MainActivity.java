@@ -1,8 +1,10 @@
 package com.sunztech.sahihbukhari;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,16 +78,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdClosed() {
-                if(isChapters)
-                {
-                    Intent intent = new Intent(MainActivity.this, BookDetailsActivity.class);
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(MainActivity.this, BookMarkActivity.class);
-                    startActivity(intent);
-                }
             }
         });
+
+/*
+        new Handler().postDelayed(() -> {
+            Intent mainIntent = new Intent(MainActivity.this, StaticAddActivity.class);
+            startActivity(mainIntent);
+        }, 500);
+*/
 
     }
 
@@ -120,39 +121,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gotoBookMark(View view) {
-        if(numberOfClicks % counter == 0)
-        {
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            isChapters = false;
-            numberOfClicks++;
-
-        }else{
             Intent intent = new Intent(this, BookMarkActivity.class);
             startActivity(intent);
             numberOfClicks++;
-        }
-
-
     }
 
     public void gotoHadith(View view) {
-        if(numberOfClicks % counter == 0)
-        {
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            isChapters = true;
-            numberOfClicks++;
-
-        }else{
             Intent intent = new Intent(this, BookDetailsActivity.class);
             startActivity(intent);
             numberOfClicks++;
-        }
+    }
+
+    public void shareBook(View view) {
+        MyUtils.shareApp("https://play.google.com/store/apps/details?id=" + this.getPackageName(), this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setCancelable(false);
+        dialog.setTitle("Alert!");
+        dialog.setMessage("Are you sure you want to close this app?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                MainActivity.super.onBackPressed();
+            }
+        }).setNegativeButton("No ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
 
     }
 
-    public void shareBook(View view)
-    {
-        MyUtils.shareApp("https://play.google.com/store/apps/details?id=" + this.getPackageName(), this);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (numberOfClicks % counter == 0) {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            isChapters = true;
+            numberOfClicks++;
+        }
+
     }
 
 }
